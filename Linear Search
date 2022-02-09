@@ -1,0 +1,27 @@
+#include<iostream>
+#include<conio.h>
+using namespace std;
+int main()
+{
+	int a[100],n,key,flag=0;
+	cout<<"\nEnter size of array ";
+	cin>>n;
+	cout<<"\nEnter element of array ";
+	for(int i=0;i<=n-1;i++)
+	{
+		cin>>a[i];
+	}
+	cout<<"\nEnter any element you want to be searched ";
+	cin>>key;
+	for(int i=0;i<=n-1;i++)
+	{
+		if(a[i]==key)
+		flag=1;
+		break;
+	}
+	if(flag==1)
+	cout<<"\nSearched element found ";
+	else
+	cout<<"\nElement NOT found";
+	getch();
+}
