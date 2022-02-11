@@ -1,0 +1,172 @@
+#include<iostream>
+#include<conio.h>
+#include<stdlib.h>
+using namespace std;
+int main(){
+    int a[10][10],n,ch,i,j;
+    cout<<"***SPARCE MATRIX***";
+    do{
+        cout<<"\nEnter 1 for Upper Triangular sparce matrix ";
+        cout<<"\nEnter 2 for lower Triangular sparce matrix ";
+        cout<<"\nEnter 3 for Left Diagonal sparce matrix ";
+        cout<<"\nEnter 4 for Right Diagonal sparce matrix ";
+        cout<<"\nEnter 5 for Upper Right Triangular sparce matrix ";
+        cout<<"\nEnter 6 for lower Right Triangular sparce matrix ";
+        cout<<"\nEnter 7 for exit ";
+        cout<<"\nEnter your choice ";
+        cin>>ch;
+        switch (ch)
+        {
+        case 1:
+            cout<<"\nEnter size of square matrix ";
+            cin>>n;
+            cout<<"\nEnter element of matrix ";
+            for(i=0;i<=n-1;i++)
+            {
+                for(j=0;j<=n-1;j++)
+                {
+                    if(i+j<n-(n-2))
+                    cin>>a[i][j];
+                    else
+                    a[i][j]=0; 
+                }            
+            }
+            cout<<"\nFinial matrix "<<endl;
+            for(i=0;i<=n-1;i++)
+            {
+                for(j=0;j<=n-1;j++)
+                {
+                    cout<<a[i][j]<<"\t";
+                }
+                cout<<endl;
+            }
+            break;
+        case 2:
+          cout<<"\nEnter size of square matrix ";
+            cin>>n;
+            cout<<"\nEnter element of matrix ";
+            for(i=0;i<=n-1;i++)
+            {
+                for(j=0;j<=n-1;j++)
+                {
+                    if(i>j)
+                    cin>>a[i][j];
+                    else
+                    a[i][j]=0; 
+                }            
+            }
+            cout<<"\nFinial matrix "<<endl;
+            for(i=0;i<=n-1;i++)
+            {
+                for(j=0;j<=n-1;j++)
+                {
+                    cout<<a[i][j]<<"\t";
+                }
+                cout<<endl;
+            }
+            break;
+        case 3:
+            cout<<"\nEnter size of square matrix ";
+            cin>>n;
+            cout<<"\nEnter element of matrix ";
+            for(i=0;i<=n-1l;i++)
+            {
+                for(j=0;j<=n-1;j++)
+                {
+                    if(i==j)
+                    cin>>a[i][j];
+                    else
+                    a[i][j]=0; 
+                }            
+            }
+            cout<<"\nFinial matrix "<<endl;
+            for(i=0;i<=n-1;i++)
+            {
+                for(j=0;j<=n-1;j++)
+                {
+                    cout<<a[i][j]<<"\t";
+                }
+                cout<<endl;
+            }
+            break;
+        case 4:
+            cout<<"\nEnter size of square matrix ";
+            cin>>n;
+            cout<<"\nEnter element of matrix ";
+            for(i=0;i<=n-1l;i++)
+            {
+                for(j=0;j<=n-1;j++)
+                {
+                    if(i+j==n-1)
+                    cin>>a[i][j];
+                    else
+                    a[i][j]=0; 
+                }            
+            }
+            cout<<"\nFinial matrix "<<endl;
+            for(i=0;i<=n-1;i++)
+            {
+                for(j=0;j<=n-1;j++)
+                {
+                    cout<<a[i][j]<<"\t";
+                }
+                cout<<endl;
+            }
+            break;
+        case 5:
+            cout<<"\nEnter size of square matrix ";
+            cin>>n;
+            cout<<"\nEnter element of matrix ";
+            for(i=0;i<=n-1l;i++)
+            {
+                for(j=0;j<=n-1;j++)
+                {
+                    if(j>i)
+                    cin>>a[i][j];
+                    else
+                    a[i][j]=0; 
+                }            
+            }
+            cout<<"\nFinial matrix "<<endl;
+            for(i=0;i<=n-1;i++)
+            {
+                for(j=0;j<=n-1;j++)
+                {
+                    cout<<a[i][j]<<"\t";
+                }
+                cout<<endl;
+            }
+            break;
+        case 6:
+            cout<<"\nEnter size of square matrix ";
+            cin>>n;
+            cout<<"\nEnter element of matrix ";
+            for(i=0;i<=n-1l;i++)
+            {
+                for(j=0;j<=n-1;j++)
+                {
+                    if(i+j>=n)
+                    cin>>a[i][j];
+                    else
+                    a[i][j]=0; 
+                }            
+            }
+            cout<<"\nFinial matrix "<<endl;
+            for(i=0;i<=n-1;i++)
+            {
+                for(j=0;j<=n-1;j++)
+                {
+                    cout<<a[i][j]<<"\t";
+                }
+                cout<<endl;
+            }
+            break;
+        case 7:
+        exit(0);
+        default:
+        cout<<"\nEnter correct choice ";
+            break;
+        }
+
+    }while(1);
+}
