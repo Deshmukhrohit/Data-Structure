@@ -1,0 +1,44 @@
+#include<iostream>
+#include<conio.h>
+#include<conio.h>
+using namespace std;
+int main()
+{
+    int a[100],n,beg,end,mid,flag=0,key;
+    cout<<"\nEnter size of array ";
+    cin>>n;
+    cout<<"\nEnter elements of array ";
+     for(int i=0;i<=n-1;i++)
+    {
+        cin>>a[i];
+    }
+    cout<<"\nEnter Element of array ";
+    cin>>key;
+    beg=0;end=n-1;mid=(beg+mid)/2;
+    if(a[mid]==key){
+        flag=1;
+    }
+    else
+    {
+       while(beg<=end)
+       {
+         mid=(beg+end)/2;
+         if(a[mid]==key) 
+         {
+          flag=1;
+          break;
+         }
+         else{
+            if(a[mid]<key)
+              beg=mid+1;
+             else
+              end=mid-1;
+             }
+        }
+    }
+    if(flag==1)
+        cout<<"\nSearched element found ";
+    else
+        cout<<"\nElement NOT found ";
+        getch();
+}
