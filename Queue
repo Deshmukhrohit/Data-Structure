@@ -1,0 +1,85 @@
+#include<iostream>
+#include<stdlib.h>
+#include<conio.h>
+using namespace std;
+#define MAX 8
+int a[MAX];
+int front=-1;
+int rear=-1;
+void qinsert(int x)
+{
+   if(rear==MAX-1)
+   {
+       cout<<"\nqueue is full,insertion impossible";
+   }
+   else
+   {
+    rear++;
+    a[rear]=x;
+    if(front==-1)
+    front=0;
+   }
+}
+void qdelite()
+{
+   if(front==-1)
+   {
+       cout<<"\nQueue is empty,detetion impossible ";
+   }
+   else{
+       cout<<"\nDeleted element = "<<a[front];
+       if(front==rear){
+           front=-1;rear=-1;
+       }
+           front++;
+   }
+}
+void qtraverse()
+{
+    if(front==-1)
+    cout<<"\nqueue is null ";
+    else
+    {
+        cout<<"\nqueue Element ";
+        for(int i=front;i<=rear;i++)
+        {
+            cout<<a[i]<<endl;
+        }
+    }
+}
+int main()
+{
+   int ch,n;
+   do{
+       cout<<"\nQueue Operation ";
+       cout<<"\nEnter 1 for insertion ";
+       cout<<"\nEnter 2 for Deletation ";
+       cout<<"\nEnter 3 for traverse ";
+       cout<<"\nEnter 4 for exit ";
+       cout<<"\nEnter your choice ";
+       cin>>ch;
+    switch(ch)
+    {
+        case 1:
+        cout<<"\nEnter any element ";
+        cin>>n;
+        qinsert(n);
+        break;
+
+        case 2:
+        qdelite();
+        break;
+
+        case 3:
+        qtraverse();
+        break;
+
+        case 4:
+        exit(0);
+        break;
+
+        default:
+        cout<<"\nEnter correct choice ";
+    }
+   }while (1);
+}
