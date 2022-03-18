@@ -1,0 +1,106 @@
+#include<iostream>
+#include<conio.h>
+using namespace std;
+class node
+{
+    int data;
+    node *next;
+    public:
+    void insert(int x);
+    void del();
+    void traverse();
+};
+node *front=NULL;
+node *rear=NULL;
+void node::insert(int x)
+{
+    node *p=new node;
+    p->data=x;
+    p->next=NULL;
+    if(front==NULL)
+    {
+        front=p;
+        rear=p;
+    }
+    else
+    {
+        rear->next=p;
+        rear=p;
+    }
+    cout<<"\nElement inserted ";
+}
+void node::del()
+{
+    if(front==NULL)
+    {
+        cout<<"\nDynamic queue is empty,deletion impossible ";
+    }
+    else
+    {
+        node *temp;
+        temp=front;
+        //rear->next=NULL;
+        cout<<"\nDeleted element = "<<front->data;
+        if(front ->next==NULL)
+        {
+         rear=NULL;
+         delete temp;
+        }
+        else
+        {
+            front=front->next;
+            delete temp;
+        }
+    }
+}
+void node::traverse()
+{
+    if(front==NULL)
+    {
+        cout<<"\nDynamic queue is empty";
+    }
+    else
+    {
+        node *temp;
+        temp=front;
+        cout<<"\nElemenr of Dynamic queue = \n";
+        while(temp!=NULL)
+        {
+            cout<<temp->data<<endl;
+            temp=temp->next;
+        }
+    }
+}
+int main()
+{
+    node n;
+    int ch,x;
+    do
+    {
+     cout<<"\nEnter 1 for insertion of Dynamic queue ";
+     cout<<"\nEnter 2 for deletion of Dynamic queue ";
+     cout<<"\nEnter 3 for traverse of Dynamic queue ";
+     cout<<"\nEnter 4 for exit ";
+     cout<<"\nEnter any choice ";
+     cin>>ch;
+     switch(ch)
+     {
+         case 1:
+         cout<<"\nEnter any number ";
+         cin>>x;
+         n.insert(x);
+         break;
+         case 2:
+         n.del();
+         break;
+         case 3:
+         n.traverse();
+         break;
+         case 4:
+         exit(0);
+         default:
+         cout<<"\nEnter corrext choice ";
+     }
+    } while (1);
+}
+
