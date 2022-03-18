@@ -1,0 +1,215 @@
+#include<iostream>
+#include<conio.h>
+using namespace std;
+class node
+{
+    private:
+    int data;
+    node *next;
+    public:
+    void insertion_at_beg(int);
+    void insertion_at_end(int);
+    void insertiion_at_pos(int,int);
+    void Delete_at_beg();
+    void Delete_at_end();
+    void Delete_at_pos(int);
+    void traversal();
+};
+node *root=NULL;
+void node :: insertion_at_beg(int x)
+{
+     node *p = new node;
+     p->data=x;
+     if(root==NULL)
+     {
+         p->next=NULL;
+         root=p;
+     }
+     else
+     {
+         p->next=root;
+         root=p;
+     }
+     cout<<"\nElement inserted ";
+}
+void node::insertion_at_end(int x)
+{
+    node *p=new node;
+     p->data=x;
+     p->next=NULL;
+    if(root==NULL)
+    {
+        root=p;
+    }
+    else
+    {
+        node *temp=new node;
+        temp=root;
+        while(temp->next!=NULL)
+        {
+            temp=temp->next;
+        }
+        temp->next=p;
+    }
+    cout<<"\nELement inserted ";
+}
+void node::Delete_at_beg()
+{
+    if(root==NULL)
+    {
+        cout<<"\nLinked List is empty,deletion impossible ";
+    }
+    else
+    {
+        node *temp;
+        temp=root;
+        cout<<"\nDeleted element is "<<temp->data;
+        if(root->next==NULL)
+        {
+            root=NULL;
+            delete temp;
+        }
+        else
+        {
+            root=root->next;
+            delete temp;
+        }
+    }
+}
+void node::Delete_at_end()
+{
+    if(root==NULL)
+    {
+        cout<<"\nLinked List is empty,deletion impossible ";
+    }
+    else
+    {
+        node *temp;
+        temp=root;
+        //cout<<"\nDeleted element is "<<root->data;
+        if(root->next==NULL)
+        {
+         root=NULL;
+         delete temp;
+        }
+        node *t=root->next;
+        while(t->next!=NULL)
+        {
+            t=t->next;
+            temp=temp->next;
+        }
+        cout<<"\nDeleted element is "<<t->data;
+         temp->next=NULL;
+         delete t;
+    }
+}
+void node::traversal()
+{
+    if(root==NULL)
+    {
+        cout<<"\nLinked List is empty,deletion impossible ";
+    }
+    node *temp;
+    temp=root;
+    cout<<"\nElemnet of Linked List is ";
+    while(temp!=NULL)
+    {
+        cout<<temp->data<<endl;
+        temp=temp->next;
+    }
+}
+void node::insertiion_at_pos(int x,int pos)
+{
+    node *temp,*p;
+    temp=root;
+    for(int i=1;i<=pos-1;i++)
+    {
+        if(temp==NULL)
+        {
+            cout<<"\nInsufficient element avaliable in Linked List ,insertion impossible ";
+            return;
+        }
+        temp=temp->next;
+    }
+    p=new node;
+    p->data=x;
+    p->next=temp->next;
+    temp->next=p;
+    cout<<"\nElement inserted ";
+}
+void node::Delete_at_pos(int pos)
+{
+    node *temp,*p;
+    temp=root;
+    for(int i=1;i<=pos-1;i++)
+    {
+        if(temp==NULL)
+        {
+            cout<<"\nInsufficient space available in Linked List,Deletion impossible ";
+            return;
+        }
+        temp=temp->next;
+    }
+    p=temp->next;
+    cout<<"\nDeleted element "<<p->data;
+    temp->next=p->next;
+    delete p;
+}
+int main()
+{
+    node n;
+    int x,ch,pos;
+    do
+    {
+        cout<<"\nEnter 1 for insertion_at_beggining";
+        cout<<"\nEnter 2 for insertion_at_end";
+        cout<<"\nEnter 3 for insertion_at_position";
+        cout<<"\nEnter 4 for Delete_at_beggining";
+        cout<<"\nEnter 5 for Delete_at_end";
+        cout<<"\nEnter 6 for Delete_at_position";
+        cout<<"\nEnter 7 for Traversal";
+        cout<<"\nEnter 8 for Exit";
+        cout<<"\nEnter correct choice ";
+        cin>>ch;
+        switch(ch)
+        {
+            case 1:
+            cout<<"\nEnter any element of Linked List ";
+            cin>>x;
+            n.insertion_at_beg(x);
+            break;
+            case 2:
+            cout<<"\nEnter any element of Linked List ";
+            cin>>x;
+            n.insertion_at_end(x);
+            break;
+            case 3:
+            cout<<"\nEnter any element of Linked List ";
+            cin>>x;
+            cout<<"\nEnter position of element of Linked List ";
+            cin>>pos;
+            n.insertiion_at_pos(x,pos);
+            break;
+            case 4:
+            n.Delete_at_beg();
+            break;
+            case 5:
+            n.Delete_at_end();
+            break;
+            case 6:
+            cout<<"\nEnter position of Linked List ";
+            cin>>pos;
+             n.Delete_at_pos(pos);
+             break;
+            case 7:
+            n.traversal();
+            break;
+            case 8:
+            exit(0);
+            default:
+            cout<<"\nEnrer correct choice ";
+
+        }
+    } while (1);
+    
+}
