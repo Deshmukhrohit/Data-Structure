@@ -1,0 +1,110 @@
+#include<iostream>
+#include<conio.h>
+#include<stdlib.h>
+using namespace std;
+class node
+{
+    int data;
+    node *next;
+    public:
+    void push(int x);
+    void pop();
+    void traverse();
+};
+node *root=NULL;
+node *top=NULL;
+void node::push(int x)
+{
+  node *p=new node;
+  p->data=x;
+  p->next=NULL;
+  if(top==NULL)
+  {
+      root=p;
+      top=p;
+  }
+  else
+  {
+      top->next=p;
+      top=p;
+  }
+ cout<<"\nElement inserted ";
+}
+void node::pop()
+{
+    if(top==NULL)
+    {
+   cout<<"\nDynamic stack is empty,deletion impossible ";
+    }
+    else
+    {
+        cout<<"\nDeleted element = "<<top->data;
+        node *temp;
+        temp=top;
+        if(root==top)
+        {
+            root=NULL;
+            top=NULL;
+            delete temp;
+        }
+        else
+        {
+        node *t=root;
+        while(t->next!=top)
+        {
+          t=t->next;
+        }
+         top=t;
+         top->next=NULL;
+         delete temp;
+       }
+    }
+}
+void node::traverse()
+{
+    if(root==top)
+    {
+        cout<<"\nDynamic stack is empty ";
+    }
+    else
+    {
+        cout<<"\nELement of Dynamic stack = \n";
+      node *temp=root;
+      while(temp!=NULL)
+      {
+          cout<<temp->data<<endl;
+          temp=temp->next;
+      }
+    }
+}
+int main()
+{
+    node n;
+    int ch,x;
+    do{
+        cout<<"\nEnter 1 for insertion of Dynamic stack ";
+        cout<<"\nEnter 2 for deletion of Dynamic stack ";
+        cout<<"\nEnter 3 for traversal ";
+        cout<<"\nEnter 4 for exit ";
+        cout<<"\nEnter your choice ";
+        cin>>ch;
+        switch(ch)
+        {
+            case 1:
+            cout<<"\nEnter any number ";
+            cin>>x;
+            n.push(x);
+            break;
+            case 2:
+            n.pop();
+            break;
+            case 3:
+            n.traverse();
+            break;
+            case 4:
+            exit(0);
+            default:
+            cout<<"\nEnter correct choice ";
+        }
+    }while(1);
+}
