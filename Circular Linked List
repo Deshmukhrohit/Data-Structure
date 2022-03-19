@@ -1,0 +1,226 @@
+#include<iostream>
+#include<conio.h>
+#include<stdlib.h>
+using namespace std;
+class node
+{
+    int data;
+    node *next;
+    public:
+    void insert_at_beg(int x);
+    void insert_at_end(int x);
+    void insert_at_pos(int x,int pos);
+    void del_at_beg();
+    void del_at_end();
+    void del_at_pos(int pos);
+    void traverse();
+};
+node *root=NULL;
+node *first=NULL;
+node *last=NULL;
+void node::insert_at_beg(int x)
+{
+    node *p=new node;
+    p->data=x;
+    if(first==NULL)
+    {
+        first=p;
+        last=p;
+        p->next=p;
+    }
+    else
+    {
+       p->next=first;
+       first=p;
+       last->next=p;
+    }
+    cout<<"\nElement insert successfully ";
+}
+void node::insert_at_end(int x)
+{
+     node *p=new node;
+     p->data=x;
+     if(first==NULL)
+     {
+         first=p;
+         last=p;
+         p->next=p;
+     }
+     else
+     {
+         last->next=p;
+         last=p;
+         p->next=first;
+     }
+     cout<<"\nElement insert successfully ";
+}
+void node::insert_at_pos(int x, int pos)
+{
+      node *temp;
+      node *p;
+      node *t;
+      temp=first;
+      t=last;
+      t->next=first;
+      for(int i=1;i<pos-1;i++)
+      {
+          if(temp==NULL)
+          {
+              cout<<"\nInsufficient element available in Circular linked list ";
+          }
+          temp=temp->next;
+      }
+      p=new node;
+      p->data=x;
+      p->next=temp->next;
+      temp->next=p;
+      cout<<"\nElement inserted";
+}
+void node::del_at_beg()
+{
+    if(first==NULL)
+    {
+        cout<<"\nCircular Linked List is empty,deletion impossible ";
+    }
+    else
+    {
+        cout<<"\nDeleted element = "<<first->data;
+        node *temp;
+        temp=first;
+        if(first==last)
+        {
+            first=NULL;
+            last=NULL;
+            delete temp;
+        }
+        else
+        {
+            first=first->next;
+            last->next=first;
+            delete temp;
+        }
+    }
+}
+void node::del_at_end()
+{
+    node *temp;
+    temp=last;
+    if(first==NULL)
+    {
+        cout<<"\nCircular Linked List is empty,deletion impossible ";
+    }
+    else
+    {
+        cout<<"Deleted element = "<<last->data<<endl;
+         if(first==last)
+         {
+             first=NULL;
+             last=NULL;
+             delete temp;
+         }
+         else
+         {
+             node *t=first;
+             while(t->next!=last)
+             {
+                 t=t->next;
+             }
+             last=t;
+             last->next=first;
+             delete temp;
+         }
+    }
+}
+void node::del_at_pos(int pos)
+{
+    node * temp;
+    node *p;
+    node *t;
+    temp=first;
+    t=last;
+    t->next=first;
+    for(int i=1;i<pos-1;i++)
+    {
+        if(temp==NULL)
+        cout<<"\nInsufficient element available in Circular Linked List ";
+        temp=temp->next;
+    }
+    p=temp->next;
+    cout<<"\nDeleted element = "<<p->data;
+    temp->next=p->next;
+    delete p;
+}
+void node::traverse()
+{
+    node *temp;
+    if(first==NULL)
+    {
+     cout<<"\nCircular Linked List is empty,traverse impossible ";
+    }
+    else
+    {
+        cout<<"\nList of Circular linked list = \n";
+        temp=first;
+        do
+        {
+        cout<<temp->data<<endl;
+        temp=temp->next;
+        } while (temp!=first);
+    }
+}
+int main()
+{
+   node n;
+   int ch,x,pos;
+   do
+   {
+       cout<<"\nEnter 1 for insertion at beg of circular linked list ";
+       cout<<"\nEnter 2 for insertion at end of circular linked list ";
+       cout<<"\nEnter 3 for insertion at pos of circular linked list ";
+       cout<<"\nEnter 4 for deletion at beg of circular linked list ";
+       cout<<"\nEnter 5 for deletion at end of circular linked list ";
+       cout<<"\nEnter 6 for deletion at pos of circular linked list ";
+       cout<<"\nEnter 7 for traverse of circular linked list ";
+       cout<<"\nEnter 8 for exit ";
+       cout<<"\nEnter your choice ";
+       cin>>ch;
+       switch(ch)
+       {
+           case 1:
+           cout<<"\nEnter any number ";
+           cin>>x;
+           n.insert_at_beg(x);
+           break;
+           case 2:
+           cout<<"\nEnter any number ";
+           cin>>x;
+           n.insert_at_end(x);
+           break;
+           case 3:
+           cout<<"\nEnter any number ";
+           cin>>x;
+           cout<<"\nEnter any position you will insert a element ";
+           cin>>pos;
+           n.insert_at_pos(x,pos);
+           break;
+           case 4:
+           n.del_at_beg();
+           break;
+           case 5:
+           n.del_at_end();
+           break;
+           case 6:
+           cout<<"\nEnter any position you want to delete aelement ";
+           cin>>pos;
+           n.del_at_pos(pos);
+           break;
+           case 7:
+           n.traverse();
+           break;
+           case 8:
+           exit(0);
+           default:
+           cout<<"\nEnter correct choice ";
+       }
+   } while (1); 
+}
