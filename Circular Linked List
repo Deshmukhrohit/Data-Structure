@@ -15,7 +15,7 @@ class node
     void del_at_pos(int pos);
     void traverse();
 };
-node *root=NULL;
+//node *root=NULL;
 node *first=NULL;
 node *last=NULL;
 void node::insert_at_beg(int x)
@@ -60,13 +60,14 @@ void node::insert_at_pos(int x, int pos)
       node *p;
       node *t;
       temp=first;
-      t=last;
-      t->next=first;
+     // t=last;
+      //t->next=first;
       for(int i=1;i<pos-1;i++)
       {
-          if(temp==NULL)
+          if(temp==last)
           {
               cout<<"\nInsufficient element available in Circular linked list ";
+              return;
           }
           temp=temp->next;
       }
@@ -78,7 +79,7 @@ void node::insert_at_pos(int x, int pos)
 }
 void node::del_at_beg()
 {
-    if(first==NULL)
+    if(first==last)
     {
         cout<<"\nCircular Linked List is empty,deletion impossible ";
     }
@@ -87,7 +88,7 @@ void node::del_at_beg()
         cout<<"\nDeleted element = "<<first->data;
         node *temp;
         temp=first;
-        if(first==last)
+        if(first==NULL)
         {
             first=NULL;
             last=NULL;
@@ -137,12 +138,15 @@ void node::del_at_pos(int pos)
     node *p;
     node *t;
     temp=first;
-    t=last;
-    t->next=first;
+   // t=last;
+    //t->next=first;
     for(int i=1;i<pos-1;i++)
     {
-        if(temp==NULL)
-        cout<<"\nInsufficient element available in Circular Linked List ";
+        if(temp==last)
+        {
+		cout<<"\nInsufficient element available in Circular Linked List ";
+		return;
+	    }
         temp=temp->next;
     }
     p=temp->next;
