@@ -1,0 +1,258 @@
+#include<iostream>
+#include<conio.h>
+#include<stdlib.h>
+using namespace std;
+class cdnode
+{
+	private:
+		int data;
+		cdnode *next;
+		cdnode *pre;
+	public:
+		void insert_at_beg(int x);
+		void insert_at_end(int x);
+		void insert_at_pos(int x,int pos);
+		void del_at_beg();
+		void del_at_end();
+		void del_at_pos(int pos);
+		void traverse_at_beg();
+		void traverse_at_end();
+};
+cdnode *head=NULL;
+cdnode *tail=NULL;
+void cdnode::insert_at_beg(int x)
+{
+	cdnode *p=new cdnode;
+	p->data=x;
+	if(head==NULL)
+	{
+		head=p;
+		tail=p;
+		p->next=p;
+		p->pre=p;
+	}
+	else
+	{
+		p->next=head;
+		head->pre=p;
+		head=p;
+		tail->next=p;
+		p->pre=tail;
+	}
+	cout<<"\nElement inserted successfully ";
+}
+void cdnode::insert_at_end(int x)
+{
+	cdnode *p=new cdnode;
+    p->data=x;
+    if(head==NULL)
+    {
+        head=p;
+        tail=p;
+        p->next=p;
+        p->pre=tail;
+    }
+    else
+    {
+        p->pre=tail;
+        tail->next=p;
+        tail=p;
+        p->next=head;
+    }
+    cout<<"\nElement inserted successfully ";
+}
+void cdnode::insert_at_pos(int x,int pos)
+{
+	cdnode *temp,*p,*t;
+	temp=head;
+	for(int i=1;i<pos-1;i++)
+	{
+		if(temp==tail)
+		{
+			cout<<"\nCircular Double Linked List is insufficient,insertion impossible ";
+			return;
+		}
+		temp=temp->next;
+	}
+	t=temp->next;
+	p=new cdnode;
+	p->data=x;
+	p->next=t;
+	t->pre=p;
+	temp->next=p;
+	p->pre=temp;
+	cout<<"\nElement inserted successfully ";
+}
+void cdnode::del_at_beg()
+{
+	if(head==NULL)
+	cout<<"\nCircular Double Linked List is empty,deletion impossible ";
+	else
+	{
+		cout<<"\nDeleted Element = "<<head->data;
+		cdnode *temp=head;
+		if(head==tail)
+		{
+			head=NULL;
+			tail=NULL;
+			delete temp;
+		}
+		else
+		{
+			head=head->next;
+			head->pre=tail;
+			tail->next=head;
+			delete temp;
+		}
+	}
+}
+void cdnode::del_at_end()
+{
+	if(head==tail)
+	{
+		cout<<"\nCircular double Linked List is Empty,deletion impossible ";
+	}
+	else
+	{
+		cout<<"\nDeleted Element = "<<tail->data;
+		cdnode *temp=tail;
+		if(head==tail)
+		{
+			head=NULL;
+			tail=NULL;
+			delete temp;
+		}
+		else
+		{
+			tail=tail->pre;
+			tail->next=head;
+			head->pre=tail;
+			delete temp;
+		}	
+	}
+}
+void cdnode::del_at_pos(int pos)
+{
+	cdnode *temp,*p,*t;
+	temp=head;
+	for(int i=1;i<pos-1;i++)
+	{
+		if(temp==tail)
+		{
+		cout<<"\nInsufficient element available in Double Linked List ,deletion impossible ";
+		return;
+		}
+		temp=temp->next;
+	}
+	p=temp->next;
+	t=p->next;
+	cout<<"\nDeleted Element = "<<p->data;
+	temp->next=t;
+	t->pre=temp;
+	delete p;
+}
+void cdnode::traverse_at_beg()
+{    
+   cdnode *temp;
+     if(head==NULL)
+     {
+     	cout<<"\nCircular Double Linked List is empty ";
+	 }
+	 else
+	 {
+	 	cout<<"\nElement of Circular Double Linked List = \n";
+	 	temp=head;
+	 	do
+	 	{
+	 	cout<<temp->data<<endl;
+		 temp=temp->next;	
+		}while(temp!=head);
+	 }
+}
+void cdnode::traverse_at_end()
+{
+	cdnode *temp;
+	if(head==NULL)
+     {
+     	cout<<"\nCircular Double Linked List is empty ";
+	 }
+	 else
+	 {
+	 	cout<<"\nElement of Circular Double Linked List = \n";
+	 	temp=tail;
+	 	do
+	 	{
+	 	cout<<temp->data<<endl;
+		 temp=temp->pre;	
+		}while(temp!=tail);
+	 }
+}
+int main()
+{
+	 cdnode d;
+    int ch,n,pos;
+    do
+    {
+       cout<<"\nEnter 1 for insertion at beg of circular double linked list ";
+       cout<<"\nEnter 2 for insertion at end of circular double linked list ";
+       cout<<"\nEnter 3 for insertion at position of circular double linked list ";
+        cout<<"\nEnter 4 for deletion at beg of circular double linked list ";
+        cout<<"\nEnter 5 for deletion at end of circular double linked list ";
+        cout<<"\nEnter 6 for deletion at position of circular double linked list ";
+        cout<<"\nEnter 7 for traverse at beg of circular double linked list ";
+        cout<<"\nEnter 8 for traverse at end of circular double linked list ";
+        cout<<"\nEnter 9 for exit of circular double linked list ";
+        cout<<"\nEnter your choice ";
+        cin>>ch;
+        switch(ch)
+        {
+            case 1:
+            cout<<"\nEnter any number ";
+            cin>>n;
+            d.insert_at_beg(n);
+            break;
+
+            case 2:
+            cout<<"\nEnter any number ";
+            cin>>n;
+            d.insert_at_end(n);
+            break;
+
+            case 3:
+            cout<<"\nEnter any number ";
+            cin>>n;
+            cout<<"\nEnter any position you will insert a element ";
+            cin>>pos;
+            d.insert_at_pos(n,pos);
+            break;
+
+            case 4:
+            d.del_at_beg();
+            break;
+
+            case 5:
+            d.del_at_end();
+            break;
+
+            case 6:
+            cout<<"Enter ant position you will delite a element ";
+            cin>>pos;
+            d.del_at_pos(pos);
+            break;
+
+            case 7:
+            d.traverse_at_beg();
+            break;
+
+            case 8:
+            d.traverse_at_end();
+            break;
+
+            case 9:
+            exit(0);
+
+            default:
+            cout<<"\nEnter correct choice ";
+        }
+    } while (1);
+}
