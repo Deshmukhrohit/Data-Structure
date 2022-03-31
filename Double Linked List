@@ -1,0 +1,241 @@
+#include<iostream>
+#include<conio.h>
+#include<stdlib.h>
+using namespace std;
+class node
+{
+    private:
+    int data;
+    node *next;
+    node *pre;
+    public:
+    void insert_at_beg(int x);
+    void insert_at_end(int x);
+    void insert_at_pos(int x,int pos);
+    void del_at_beg();
+    void del_at_end();
+    void del_at_pos(int pos);
+    void traverse_at_beg();
+    void traverse_at_end();
+};
+node *head=NULL;
+node *tail=NULL;
+void node::insert_at_beg(int x)
+{
+    node *p=new node();
+    p->data=x;
+    p->pre=NULL;
+    if(head==NULL)
+    {
+        head=p;
+        tail=p;
+        p->next=NULL;
+    }
+    else
+    {
+        head->pre=p;
+        p->next=head;
+        head=p;
+    }
+    cout<<"\nElement inserted ";
+}
+void node::insert_at_end(int x)
+{
+    node *p=new node();
+    p->data=x;
+    p->next=NULL;
+    if(tail==NULL)
+    {
+        head=p;
+        tail=p;
+        p->next=NULL;
+    }
+    else
+    {
+        tail->next=p;
+        p->pre=tail;
+        tail=p;
+    }
+    cout<<"\nElement inserted ";
+}
+void node::del_at_beg()
+{
+    node *temp;
+    temp=head;
+    if(head==NULL)
+    cout<<"\nDouble linked List is empty,deletion impossible ";
+    else
+    {
+        if(head==tail)
+        {
+            head=NULL;
+            tail=NULL;
+            delete temp;
+        }
+        else
+        {
+            head=head->next;
+            head->pre=NULL;
+            delete temp;
+        }
+    }
+}
+void node::del_at_end()
+{
+    if(tail==NULL)
+      cout<<"\nDouble Linked List is empty,deletion impossible ";
+    else
+    {
+        node *temp;
+        temp=tail;
+        if(head==tail)
+        {
+            head=NULL;
+            tail=NULL;
+            delete temp;
+        }
+        else
+        {
+            tail=tail->pre;
+            tail->next=NULL;
+            delete temp;
+        }
+    }
+}
+void node::insert_at_pos(int x,int pos)
+{
+    node *temp,*p,*t;
+    temp=head;
+   for(int i=1;i<pos-1;i++)
+   {
+       if(temp==NULL)
+       {
+           cout<<"\nInsufficient element available in double linked list ,insertion impossible ";
+           return;
+       }
+       temp=temp->next;
+   }
+   t=temp->next;
+   p=new node;
+   p->data=x;
+   p->next=t;
+   t->pre=t;
+   temp->next=p;
+   p->pre=temp;
+    cout<<"\nElement inserted ";
+}
+void node::del_at_pos(int pos)
+{
+    node *temp,*p,*t;
+    for(int i=1;i<pos-1;i++)
+    {
+        if(temp==NULL)
+        cout<<"\nInsufficient element available in double Linked List,deletion impossible ";
+        temp=temp->next;
+    }
+    p=temp->next;
+    t=p->next;
+    cout<<"\nDeleted Element "<<p->data;
+    temp->next=p;
+    t->pre=temp;
+    delete p;
+}
+void node::traverse_at_beg()
+{
+    if(head==NULL)
+    cout<<"\nDouble Linked List is empty ";
+    else
+    {
+        node *temp;
+        temp=head;
+        while(temp!=NULL)
+        {
+           cout<<temp->data<<endl;
+           temp=temp->next;
+        }
+    }
+}
+void node::traverse_at_end()
+{
+    if(tail==NULL)
+    cout<<"\nDouble Linked List is empty";
+    else
+    {
+        node *temp;
+        temp=tail;
+        while(temp!=NULL)
+        {
+            cout<<temp->data<<endl;
+            temp=temp->pre;
+        }
+    }
+}
+int main()
+{
+    node d;
+    int ch,n,pos;
+    do
+    {
+       cout<<"\nEnter 1 for insertion at beg of double linked list ";
+       cout<<"\nEnter 2 for insertion at end of double linked list ";
+       cout<<"\nEnter 3 for insertion at position of double linked list ";
+        cout<<"\nEnter 4 for deletion at beg of double linked list ";
+        cout<<"\nEnter 5 for deletion at end of double linked list ";
+        cout<<"\nEnter 6 for deletion at position of double linked list ";
+        cout<<"\nEnter 7 for traverse at beg of double linked list ";
+        cout<<"\nEnter 8 for traverse at end of double linked list ";
+        cout<<"\nEnter 9 for exit of double linked list ";
+        cout<<"\nEnter your choice ";
+        cin>>ch;
+        switch(ch)
+        {
+            case 1:
+            cout<<"\nEnter any number ";
+            cin>>n;
+            d.insert_at_beg(n);
+            break;
+
+            case 2:
+            cout<<"\nEnter any number ";
+            cin>>n;
+            d.insert_at_end(n);
+            break;
+
+            case 3:
+            cout<<"\nEnter any number ";
+            cin>>n;
+            cout<<"\nEnter any position you will insert a element ";
+            cin>>pos;
+            d.insert_at_pos(n,pos);
+            break;
+
+            case 4:
+            d.del_at_beg();
+            break;
+
+            case 5:
+            d.del_at_end();
+            break;
+
+            case 6:
+            cout<<"Enter ant position you will delite a element ";
+            cin>>pos;
+            d.del_at_pos(pos);
+            break;
+
+            case 7:
+            d.traverse_at_beg();
+            break;
+
+            case 8:
+            d.traverse_at_end();
+            break;
+
+            case 9:
+            exit(0);
+
+            default:
+            cout<<"\nEnter correct choice ";
+        }
+    } while (1);
+}
