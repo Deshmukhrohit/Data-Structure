@@ -1,0 +1,87 @@
+#include<iostream>
+#include<conio.h>
+#include<stdlib.h>
+using namespace std;
+int a[5],front=-1,rear=-1;
+void qinert(int x)
+{
+    if((front==0 && rear==5-1) || (rear==front-1))
+    cout<<"\nCircular queue is full insertion impossible"<<endl;
+    else
+    {
+        if(rear==5-1)
+        rear=0;
+        else
+        rear++;
+        a[rear]=x;
+        cout<<"\nElement inserted"<<endl;
+        if(front==-1)
+        front=0;
+    }
+}
+void qdelete()
+{
+    if(front==-1)
+    cout<<"\nQueue is empty deletion impossible"<<endl;
+    else
+    {
+        cout<<"Deleted element="<<a[front];
+        if(front==rear)
+        {
+            front=-1;
+            rear=-1;
+        }
+        else
+        front=(front+1)%5;
+    }
+}
+void traverse()
+{
+    if(front==-1)
+    cout<<"\nempty"<<endl;
+    else
+    {
+    if(front<=rear)
+    {
+        for(int i=front;i<=rear;i++)
+        cout<<a[i]<<endl;
+    }
+    else
+    {
+    	 for(int j=0;j<=rear;j++)
+        cout<<a[j]<<endl;
+       for(int i=front;i<=5-1;i++)
+	  	  cout<<a[i]<<endl;
+    }
+    }
+}
+int main()
+{
+int x,ch;
+do
+{
+cout<<"\nEnter 1 for insertion"<<endl;
+        cout<<"Enter 2 for deletion"<<endl;
+        cout<<"Enter 3 for traversal"<<endl;
+        cout<<"Enter 4 for exit"<<endl;
+        cin>>ch;
+        switch (ch)
+        {
+        case 1:
+            cout<<"Enter any element"<<endl;
+            cin>>x;
+            qinert(x);
+            break;
+        case 2:
+            qdelete();
+            break;
+        case 3:
+            traverse();
+            break;
+        case 4:
+            exit(0);
+        default:
+            cout<<"Enter correct choice"<<endl;
+        }
+}while(1);
+}
